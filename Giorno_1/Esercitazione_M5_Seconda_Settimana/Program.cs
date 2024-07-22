@@ -1,3 +1,6 @@
+using Esercitazione_M5_Seconda_Settimana.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 namespace Esercitazione_M5_Seconda_Settimana
 {
     public class Program
@@ -8,6 +11,15 @@ namespace Esercitazione_M5_Seconda_Settimana
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services
+           .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+           .AddCookie(opt =>
+           {
+               opt.LoginPath = "/Auth/Register";
+               opt.AccessDeniedPath = "/Home/Index";
+           });
+            builder.Services.
+                AddScoped<IAuthService, AuthService>();
 
             var app = builder.Build();
 

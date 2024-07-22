@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Esercitazione_M5_Seconda_Settimana.props" />
+</Project>
