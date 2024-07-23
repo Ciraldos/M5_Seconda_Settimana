@@ -15,7 +15,7 @@ namespace Esercitazione_M5_Seconda_Settimana
            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
            .AddCookie(opt =>
            {
-               opt.LoginPath = "/Auth/Register";
+               opt.LoginPath = "/Auth/Login";
                opt.AccessDeniedPath = "/Home/Index";
            });
             builder.Services.

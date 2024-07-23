@@ -29,7 +29,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
                 var user = _authService.Login(u.Username, u.Password);
                 if (user == null)
                 {
-                    RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 var claims = new List<Claim>
                 {

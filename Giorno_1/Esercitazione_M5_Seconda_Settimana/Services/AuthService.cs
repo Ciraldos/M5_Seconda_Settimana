@@ -7,7 +7,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
     {
         private string connectionstring;
         private const string LOGIN_COMMAND = "SELECT IdUser FROM Users Where Username = @Username AND Password = @Password";
-        private const string REGISTER_COMMAND = "INSTERT INTO Users (Username, Password) OUTPUT INSERTED.IdUser Values (@username, @password)";
+        private const string REGISTER_COMMAND = "INSERT INTO Users (Username, Password) OUTPUT INSERTED.IdUser Values (@username, @password)";
         public AuthService(IConfiguration configuration)
         {
             connectionstring = configuration.GetConnectionString("AuthDb")!;
@@ -19,7 +19,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
             {
                 using var conn = new SqlConnection(connectionstring);
                 conn.Open();
-                var cmd = new SqlCommand(LOGIN_COMMAND, conn);
+                using var cmd = new SqlCommand(LOGIN_COMMAND, conn);
                 cmd.Parameters.AddWithValue("Username", Username);
                 cmd.Parameters.AddWithValue("Password", Password);
                 using var r = cmd.ExecuteReader();
@@ -40,7 +40,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
             {
                 using var conn = new SqlConnection(connectionstring);
                 conn.Open();
-                var cmd = new SqlCommand(REGISTER_COMMAND, conn);
+                using var cmd = new SqlCommand(REGISTER_COMMAND, conn);
                 cmd.Parameters.AddWithValue("username", Username);
                 cmd.Parameters.AddWithValue("password", Password);
                 var IdUser = (int)cmd.ExecuteScalar();
