@@ -7,7 +7,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
     {
         private readonly string connectionstring;
         private const string CREA_PRENOTAZIONE = "INSERT INTO Prenotazioni (DataPrenotazione, NumProgressivo, Anno, SoggiornoDal, SoggiornoAl, Caparra, Tariffa, PensioneCompleta, IdCliente, IdCamera) OUTPUT INSERTED.IdPrenotazione VALUES (@DataPrenotazione, @NumProgressivo, @Anno, @SoggiornoDal, @SoggiornoAl, @Caparra, @Tariffa, @PensioneCompleta, @IdCliente, @IdCamera)";
-
+        private const string CREA_PRENOTAZIONE_SERVIZIO = "INSERT INTO PrenotazioniServizi (IdPrenotazione, IdServizio, Data, Quantita, Prezzo) OUTPUT Inserted.IdPS VALUES (@IdPrenotazione, @IdServizio, @Data, @Quantita, @Prezzo)";
         public PrenotazioneService(IConfiguration configuration)
         {
             connectionstring = configuration.GetConnectionString("AuthDb")!;
@@ -38,6 +38,26 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
             catch (Exception ex)
             {
             }
+            return null;
+        }
+
+        public PrenotazioniServizio CreaPrenotazioneServizio(PrenotazioniServizio p)
+        {
+            try
+            {
+                using var conn = new SqlConnection(connectionstring);
+                conn.Open();
+                using var cmd = new SqlCommand(CREA_PRENOTAZIONE_SERVIZIO, conn);
+                cmd.Parameters.AddWithValue("IdPrenotazione", p.IdPrenotazione);
+                cmd.Parameters.AddWithValue("IdServizio", p.IdServizio);
+                cmd.Parameters.AddWithValue("Data", p.Data);
+                cmd.Parameters.AddWithValue("Quantita", p.Quantita);
+                cmd.Parameters.AddWithValue("Prezzo", p.Prezzo);
+                p.IdPS = (int)cmd.ExecuteScalar();
+                return p;
+
+            }
+            catch (Exception ex) { }
             return null;
         }
     }

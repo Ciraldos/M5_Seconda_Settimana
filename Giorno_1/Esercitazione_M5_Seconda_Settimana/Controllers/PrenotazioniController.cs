@@ -25,5 +25,17 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult CreaPrenotazioneServizio()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreaPrenotazioneServizio(PrenotazioniServizio p)
+        {
+            var prenotazione = _prenotazioneService.CreaPrenotazioneServizio(p);
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
