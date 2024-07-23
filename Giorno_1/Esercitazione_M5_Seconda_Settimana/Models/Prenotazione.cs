@@ -13,8 +13,5 @@
         public string PensioneCompleta { get; set; }
         public int IdCliente { get; set; }
         public int IdCamera { get; set; }
-
-        public Cliente Cliente { get; set; }
-        public Camera Camera { get; set; }
     }
 }

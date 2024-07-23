@@ -18,8 +18,9 @@ namespace Esercitazione_M5_Seconda_Settimana
                opt.LoginPath = "/Auth/Login";
                opt.AccessDeniedPath = "/Home/Index";
            });
-            builder.Services.
-                AddScoped<IAuthService, AuthService>();
+            builder.Services
+                .AddScoped<IAuthService, AuthService>()
+                .AddScoped<IPrenotazioneService, PrenotazioneService>();
 
             var app = builder.Build();
 

@@ -9,7 +9,5 @@
         public int Quantita { get; set; }
         public decimal Prezzo { get; set; }
 
-        public Prenotazione Prenotazione { get; set; }
-        public Servizio Servizio { get; set; }
     }
 }
