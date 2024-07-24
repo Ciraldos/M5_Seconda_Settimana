@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Esercitazione_M5_Seconda_Settimana")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e810092d32cee91c1fc7126b2f84484b2ce4316")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb35ec8a62a2de603748ccc8b16819098b1d60f2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Esercitazione_M5_Seconda_Settimana")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Esercitazione_M5_Seconda_Settimana")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

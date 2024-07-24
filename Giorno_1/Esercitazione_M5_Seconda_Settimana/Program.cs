@@ -20,7 +20,9 @@ namespace Esercitazione_M5_Seconda_Settimana
            });
             builder.Services
                 .AddScoped<IAuthService, AuthService>()
-                .AddScoped<IPrenotazioneService, PrenotazioneService>();
+                .AddScoped<IPrenotazioneService, PrenotazioneService>()
+                .AddScoped<ICamereService, CamereService>()
+                .AddScoped<IClientiService, ClientiService>();
 
             var app = builder.Build();
 

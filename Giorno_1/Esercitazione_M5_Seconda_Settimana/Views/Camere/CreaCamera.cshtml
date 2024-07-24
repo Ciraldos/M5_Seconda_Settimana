@@ -1,0 +1,43 @@
+﻿@model Esercitazione_M5_Seconda_Settimana.Models.Camera
+
+@{
+    ViewData["Title"] = "CreaCamera";
+}
+
+<h1>CreaCamera</h1>
+
+<h4>Camera</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreaCamera">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NumCamera" class="control-label"></label>
+                <input asp-for="NumCamera" class="form-control" />
+                <span asp-validation-for="NumCamera" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descrizione" class="control-label"></label>
+                <input asp-for="Descrizione" class="form-control" />
+                <span asp-validation-for="Descrizione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipologia" class="control-label"></label>
+                <input asp-for="Tipologia" class="form-control" />
+                <span asp-validation-for="Tipologia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
