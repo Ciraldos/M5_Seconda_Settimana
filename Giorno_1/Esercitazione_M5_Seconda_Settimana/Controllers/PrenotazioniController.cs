@@ -37,5 +37,10 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult CercaByCf()
+        {
+            return View();
+        }
+
     }
 }
