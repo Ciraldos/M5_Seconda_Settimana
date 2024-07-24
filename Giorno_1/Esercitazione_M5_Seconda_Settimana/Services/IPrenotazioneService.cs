@@ -7,5 +7,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
         public Prenotazione CreaPrenotazione(Prenotazione p);
         public PrenotazioniServizio CreaPrenotazioneServizio(PrenotazioniServizio p);
         public IEnumerable<Prenotazione> PrenotazioneByCf(string cf);
+        public IEnumerable<Prenotazione> PrenotazioneByPensione(string p);
+
     }
 }

@@ -8,7 +8,9 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
         private readonly string connectionstring;
         private const string CREA_PRENOTAZIONE = "INSERT INTO Prenotazioni (DataPrenotazione, NumProgressivo, Anno, SoggiornoDal, SoggiornoAl, Caparra, Tariffa, PensioneCompleta, IdCliente, IdCamera) OUTPUT INSERTED.IdPrenotazione VALUES (@DataPrenotazione, @NumProgressivo, @Anno, @SoggiornoDal, @SoggiornoAl, @Caparra, @Tariffa, @PensioneCompleta, @IdCliente, @IdCamera)";
         private const string CREA_PRENOTAZIONE_SERVIZIO = "INSERT INTO PrenotazioniServizi (IdPrenotazione, IdServizio, Data, Quantita, Prezzo) OUTPUT Inserted.IdPS VALUES (@IdPrenotazione, @IdServizio, @Data, @Quantita, @Prezzo)";
-        private const string PRENOTAZIONE_BY_CF = "SELECT P.IdPrenotazione, P.DataPrenotazione, P.DataPrenotazione, P.NumProgressivo, P.Anno, P.SoggiornoDal, P.SoggiornoAl, P.Caparra, P.Tariffa, P.PensioneCompleta, P.IdCliente, P.IdCamera FROM Prenotazioni as P INNER JOIN Clienti as C ON P.IdCliente = C.IdCliente WHERE C.CF = @CF";
+        private const string PRENOTAZIONE_BY_CF = "SELECT P.IdPrenotazione, P.DataPrenotazione, P.NumProgressivo, P.Anno, P.SoggiornoDal, P.SoggiornoAl, P.Caparra, P.Tariffa, P.PensioneCompleta, P.IdCliente, P.IdCamera FROM Prenotazioni as P INNER JOIN Clienti as C ON P.IdCliente = C.IdCliente WHERE C.CF = @CF";
+        private const string PRENOTAZIONE_BY_PENSIONE = "SELECT P.IdPrenotazione, P.DataPrenotazione, P.NumProgressivo, P.Anno, P.SoggiornoDal, P.SoggiornoAl, P.Caparra, P.Tariffa, P.PensioneCompleta, P.IdCliente, P.IdCamera FROM Prenotazioni as P INNER JOIN Clienti as C ON P.IdCliente = C.IdCliente WHERE P.PensioneCompleta = @Pensione";
+
         public PrenotazioneService(IConfiguration configuration)
         {
             connectionstring = configuration.GetConnectionString("AuthDb")!;
@@ -78,17 +80,52 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
                     var p = new Prenotazione
                     {
                         IdPrenotazione = r.GetInt32(0),
-                        NumProgressivo = r.GetInt32(1),
-                        Anno = r.GetInt32(2),
-                        SoggiornoDal = r.GetDateTime(3),
-                        SoggiornoAl = r.GetDateTime(4),
-                        Caparra = r.GetDecimal(5),
-                        Tariffa = r.GetDecimal(6),
-                        PensioneCompleta = r.GetString(7),
-                        IdCliente = r.GetInt32(8),
-                        IdCamera = r.GetInt32(9),
+                        DataPrenotazione = r.GetDateTime(1),
+                        NumProgressivo = r.GetInt32(2),
+                        Anno = r.GetInt32(3),
+                        SoggiornoDal = r.GetDateTime(4),
+                        SoggiornoAl = r.GetDateTime(5),
+                        Caparra = r.GetDecimal(6),
+                        Tariffa = r.GetDecimal(7),
+                        PensioneCompleta = r.GetString(8),
+                        IdCliente = r.GetInt32(9),
+                        IdCamera = r.GetInt32(10),
                     };
                     prenotazioni.Add(p);
+                }
+                return prenotazioni;
+            }
+            catch { }
+            return null;
+        }
+        public IEnumerable<Prenotazione> PrenotazioneByPensione(string p)
+        {
+            var prenotazioni = new List<Prenotazione>();
+
+            try
+            {
+                using var conn = new SqlConnection(connectionstring);
+                conn.Open();
+                using var cmd = new SqlCommand(PRENOTAZIONE_BY_PENSIONE, conn);
+                cmd.Parameters.AddWithValue("@Pensione", p);
+                using var r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    var prenotazione = new Prenotazione
+                    {
+                        IdPrenotazione = r.GetInt32(0),
+                        DataPrenotazione = r.GetDateTime(1),
+                        NumProgressivo = r.GetInt32(2),
+                        Anno = r.GetInt32(3),
+                        SoggiornoDal = r.GetDateTime(4),
+                        SoggiornoAl = r.GetDateTime(5),
+                        Caparra = r.GetDecimal(6),
+                        Tariffa = r.GetDecimal(7),
+                        PensioneCompleta = r.GetString(8),
+                        IdCliente = r.GetInt32(9),
+                        IdCamera = r.GetInt32(10),
+                    };
+                    prenotazioni.Add(prenotazione);
                 }
                 return prenotazioni;
             }

@@ -13,10 +13,33 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers.Api
         {
             _prenotazioneService = prenotazioneService;
         }
-        [HttpGet]
+        [HttpGet("ByCf")]
         public ActionResult<IEnumerable<Prenotazione>> GetAll(string cf)
         {
+            if (string.IsNullOrWhiteSpace(cf))
+            {
+                return BadRequest("Il codice fiscale è richiesto.");
+            }
             var prenotazioni = _prenotazioneService.PrenotazioneByCf(cf);
+            if (prenotazioni == null || !prenotazioni.Any())
+            {
+                return NotFound("Nessuna prenotazione trovata per il codice fiscale fornito.");
+            }
+            return Ok(prenotazioni);
+        }
+
+        [HttpGet("ByPensione")]
+        public ActionResult<IEnumerable<Prenotazione>> GetAllByPrenotazione(string p)
+        {
+            if (string.IsNullOrWhiteSpace(p))
+            {
+                return BadRequest("Il tipo di pensione è richiesta");
+            }
+            var prenotazioni = _prenotazioneService.PrenotazioneByPensione(p);
+            if (prenotazioni == null || !prenotazioni.Any())
+            {
+                return NotFound("Nessuna prenotazione trovata per il tipo di pensione fornito fornito.");
+            }
             return Ok(prenotazioni);
         }
     }

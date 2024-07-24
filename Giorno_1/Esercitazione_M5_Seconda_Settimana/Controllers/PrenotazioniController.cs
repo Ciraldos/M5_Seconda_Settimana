@@ -42,5 +42,10 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
             return View();
         }
 
+        public IActionResult CercaByPensione()
+        {
+            return View();
+        }
+
     }
 }
