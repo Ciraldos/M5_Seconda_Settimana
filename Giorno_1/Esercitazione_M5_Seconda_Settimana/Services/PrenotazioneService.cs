@@ -138,14 +138,34 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
             return null;
         }
 
-        public PrenotazioniServizio CreaPrenotazioneServizio(PrenotazioniServizio p)
+        //public PrenotazioniServizio CreaPrenotazioneServizio(PrenotazioniServizio p)
+        //{
+        //    try
+        //    {
+        //        using var conn = new SqlConnection(connectionstring);
+        //        conn.Open();
+        //        using var cmd = new SqlCommand(CREA_PRENOTAZIONE_SERVIZIO, conn);
+        //        cmd.Parameters.AddWithValue("IdPrenotazione", p.IdPrenotazione);
+        //        cmd.Parameters.AddWithValue("IdServizio", p.IdServizio);
+        //        cmd.Parameters.AddWithValue("Data", p.Data);
+        //        cmd.Parameters.AddWithValue("Quantita", p.Quantita);
+        //        cmd.Parameters.AddWithValue("Prezzo", p.Prezzo);
+        //        p.IdPS = (int)cmd.ExecuteScalar();
+        //        return p;
+
+        //    }
+        //    catch (Exception ex) { }
+        //    return null;
+        //}
+
+        public PrenotazioniServizio CreaPrenotazioneServizio(PrenotazioniServizio p, int id)
         {
             try
             {
                 using var conn = new SqlConnection(connectionstring);
                 conn.Open();
                 using var cmd = new SqlCommand(CREA_PRENOTAZIONE_SERVIZIO, conn);
-                cmd.Parameters.AddWithValue("IdPrenotazione", p.IdPrenotazione);
+                cmd.Parameters.AddWithValue("IdPrenotazione", id);
                 cmd.Parameters.AddWithValue("IdServizio", p.IdServizio);
                 cmd.Parameters.AddWithValue("Data", p.Data);
                 cmd.Parameters.AddWithValue("Quantita", p.Quantita);

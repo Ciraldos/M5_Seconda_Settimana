@@ -42,9 +42,9 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreaPrenotazioneServizio(PrenotazioniServizio p)
+        public IActionResult CreaPrenotazioneServizio(PrenotazioniServizio p, int id)
         {
-            var prenotazione = _prenotazioneService.CreaPrenotazioneServizio(p);
+            var prenotazione = _prenotazioneService.CreaPrenotazioneServizio(p, id);
             return RedirectToAction("Index", "Home");
         }
 

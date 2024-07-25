@@ -89,6 +89,9 @@
             <td>
                 <a asp-controller="Prenotazioni" asp-action="Checkout" asp-route-id="@item.IdPrenotazione">Checkout</a>
             </td>
+            <td>
+                <a asp-controller="Prenotazioni" asp-action="CreaPrenotazioneServizio" asp-route-id="@item.IdPrenotazione">Aggiungi Servizi</a>
+            </td>
         </tr>
 }
     </tbody>
