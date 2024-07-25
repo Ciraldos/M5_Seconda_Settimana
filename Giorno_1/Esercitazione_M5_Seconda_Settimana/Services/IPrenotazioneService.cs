@@ -1,4 +1,5 @@
 ﻿using Esercitazione_M5_Seconda_Settimana.Models;
+using Esercitazione_M5_Seconda_Settimana.Models.AllModels;
 
 namespace Esercitazione_M5_Seconda_Settimana.Services
 {
@@ -8,6 +9,8 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
         public PrenotazioniServizio CreaPrenotazioneServizio(PrenotazioniServizio p);
         public IEnumerable<Prenotazione> PrenotazioneByCf(string cf);
         public IEnumerable<Prenotazione> PrenotazioneByPensione(string p);
+        public IEnumerable<Prenotazione> GetAll();
+        public AllModels Checkout(int id);
 
     }
 }

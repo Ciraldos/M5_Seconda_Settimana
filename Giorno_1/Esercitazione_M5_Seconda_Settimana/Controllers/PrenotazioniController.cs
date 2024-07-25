@@ -17,6 +17,17 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
         {
             return View();
         }
+        public IActionResult GetAllPrenotazioni()
+        {
+            var p = _prenotazioneService.GetAll();
+            return View(p);
+        }
+
+        public IActionResult Checkout(int id)
+        {
+            var p = _prenotazioneService.Checkout(id);
+            return View(p);
+        }
 
         [HttpPost]
         public IActionResult CreazionePrenotazione(Prenotazione p)
@@ -46,6 +57,8 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
         {
             return View();
         }
+
+
 
     }
 }

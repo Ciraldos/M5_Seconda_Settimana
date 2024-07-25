@@ -1,0 +1,96 @@
+﻿@model Esercitazione_M5_Seconda_Settimana.Models.AllModels.AllModels
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h1>Checkout</h1>
+
+<div>
+    <h4>Dettagli della Prenotazione</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prenotazione.NumCamera)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prenotazione.NumCamera)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prenotazione.SoggiornoDal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prenotazione.SoggiornoDal)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prenotazione.SoggiornoAl)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prenotazione.SoggiornoAl)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prenotazione.Tariffa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prenotazione.Tariffa)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <h4>Servizi</h4>
+    <hr />
+    @if (Model.Servizio != null && Model.Servizio.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Servizio.First().IdServizio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Servizio.First().Descrizione)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var servizio in Model.Servizio)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => servizio.IdServizio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => servizio.Descrizione)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Nessun servizio aggiunto.</p>
+    }
+</div>
+
+<div>
+    <h4>Importo</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Importo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Importo)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

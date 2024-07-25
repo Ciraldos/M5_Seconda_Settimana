@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Esercitazione_M5_Seconda_Settimana.Models.Prenotazione>
+
+@{
+    ViewData["Title"] = "GetAllPrenotazioni";
+}
+
+<h1>GetAllPrenotazioni</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPrenotazione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPrenotazione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumProgressivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Anno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoggiornoDal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoggiornoAl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Caparra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tariffa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PensioneCompleta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCamera)
+            </th>
+            <th>
+                Checkout
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPrenotazione)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPrenotazione)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumProgressivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoggiornoDal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoggiornoAl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Caparra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tariffa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PensioneCompleta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCamera)
+            </td>
+            <td>
+                <a asp-controller="Prenotazioni" asp-action="Checkout" asp-route-id="@item.IdPrenotazione">Checkout</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

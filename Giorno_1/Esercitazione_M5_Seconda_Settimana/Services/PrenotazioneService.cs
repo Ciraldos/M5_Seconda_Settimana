@@ -1,4 +1,5 @@
 ﻿using Esercitazione_M5_Seconda_Settimana.Models;
+using Esercitazione_M5_Seconda_Settimana.Models.AllModels;
 using Microsoft.Data.SqlClient;
 
 namespace Esercitazione_M5_Seconda_Settimana.Services
@@ -9,13 +10,106 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
         private const string CREA_PRENOTAZIONE = "INSERT INTO Prenotazioni (DataPrenotazione, NumProgressivo, Anno, SoggiornoDal, SoggiornoAl, Caparra, Tariffa, PensioneCompleta, IdCliente, IdCamera) OUTPUT INSERTED.IdPrenotazione VALUES (@DataPrenotazione, @NumProgressivo, @Anno, @SoggiornoDal, @SoggiornoAl, @Caparra, @Tariffa, @PensioneCompleta, @IdCliente, @IdCamera)";
         private const string CREA_PRENOTAZIONE_SERVIZIO = "INSERT INTO PrenotazioniServizi (IdPrenotazione, IdServizio, Data, Quantita, Prezzo) OUTPUT Inserted.IdPS VALUES (@IdPrenotazione, @IdServizio, @Data, @Quantita, @Prezzo)";
         private const string PRENOTAZIONE_BY_CF = "SELECT P.IdPrenotazione, P.DataPrenotazione, P.NumProgressivo, P.Anno, P.SoggiornoDal, P.SoggiornoAl, P.Caparra, P.Tariffa, P.PensioneCompleta, P.IdCliente, P.IdCamera FROM Prenotazioni as P INNER JOIN Clienti as C ON P.IdCliente = C.IdCliente WHERE C.CF = @CF";
-        private const string PRENOTAZIONE_BY_PENSIONE = "SELECT P.IdPrenotazione, P.DataPrenotazione, P.NumProgressivo, P.Anno, P.SoggiornoDal, P.SoggiornoAl, P.Caparra, P.Tariffa, P.PensioneCompleta, P.IdCliente, P.IdCamera FROM Prenotazioni as P INNER JOIN Clienti as C ON P.IdCliente = C.IdCliente WHERE P.PensioneCompleta = @Pensione";
-
+        private const string PRENOTAZIONE_BY_PENSIONE = "SELECT IdPrenotazione,DataPrenotazione,NumProgressivo, Anno, SoggiornoDal,SoggiornoAl, Caparra, Tariffa, PensioneCompleta, IdCliente, IdCamera FROM Prenotazioni WHERE PensioneCompleta = @Pensione";
+        private const string GET_PRENOTAZIONI = "SELECT * FROM Prenotazioni";
+        private const string GET_STANZA_PERIODO_TARIFFA = "SELECT C.NumCamera, P.SoggiornoDal, P.SoggiornoAl, P.Tariffa FROM Prenotazioni as P INNER JOIN Camere as C ON P.IdCamera = C.IdCamera WHERE P.IdPrenotazione = @Id";
+        private const string GET_SERVIZI_BY_PRENOTAZIONE = "SELECT S.* FROM Servizi as S INNER JOIN PrenotazioniServizi as PS ON S.IdServizio = PS.IdServizio WHERE PS.IdPrenotazione = @Id";
+        private const string GET_IMPORTO = "SELECT (p.Tariffa - p.Caparra + SUM(ps.Quantita * ps.Prezzo)) AS ServizioPrezzo FROM Prenotazioni AS p INNER JOIN PrenotazioniServizi AS ps ON p.IdPrenotazione = ps.IdPrenotazione WHERE p.IdPrenotazione = @Id GROUP BY p.Tariffa, p.Caparra";
         public PrenotazioneService(IConfiguration configuration)
         {
             connectionstring = configuration.GetConnectionString("AuthDb")!;
         }
 
+
+        public IEnumerable<Prenotazione> GetAll()
+        {
+            List<Prenotazione> prenotazioni = new List<Prenotazione>();
+            using var conn = new SqlConnection(connectionstring);
+            conn.Open();
+            using var cmd = new SqlCommand(GET_PRENOTAZIONI, conn);
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                var p = new Prenotazione
+                {
+                    IdPrenotazione = reader.GetInt32(0),
+                    DataPrenotazione = reader.GetDateTime(1),
+                    NumProgressivo = reader.GetInt32(2),
+                    Anno = reader.GetInt32(3),
+                    SoggiornoDal = reader.GetDateTime(4),
+                    SoggiornoAl = reader.GetDateTime(5),
+                    Caparra = reader.GetDecimal(6),
+                    Tariffa = reader.GetDecimal(7),
+                    PensioneCompleta = reader.GetString(8),
+                    IdCliente = reader.GetInt32(9),
+                    IdCamera = reader.GetInt32(10)
+                };
+                prenotazioni.Add(p);
+            }
+            return prenotazioni;
+
+        }
+
+        public AllModels Checkout(int id)
+        {
+            AllModels allModels = new AllModels();
+            try
+            {
+                using var conn = new SqlConnection(connectionstring);
+                conn.Open();
+                using (var cmd = new SqlCommand(GET_STANZA_PERIODO_TARIFFA, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    using (var r = cmd.ExecuteReader())
+                    {
+                        if (r.Read())
+                        {
+                            allModels.Prenotazione = new PrenotazioniCamerePeriodoTariffa
+                            {
+                                NumCamera = r.GetInt32(0),
+                                SoggiornoDal = r.GetDateTime(1),
+                                SoggiornoAl = r.GetDateTime(2),
+                                Tariffa = r.GetDecimal(3)
+                            };
+                        }
+                    }
+                }
+                using (var cmd2 = new SqlCommand(GET_SERVIZI_BY_PRENOTAZIONE, conn))
+                {
+                    cmd2.Parameters.AddWithValue("@Id", id);
+                    using (var r2 = cmd2.ExecuteReader())
+                    {
+                        while (r2.Read())
+                        {
+                            var s = new Servizio
+                            {
+                                IdServizio = r2.GetInt32(0),
+                                Descrizione = r2.GetString(1),
+                            };
+                            allModels.Servizio.Add(s);
+                        }
+                    }
+                }
+                using (var cmd3 = new SqlCommand(GET_IMPORTO, conn))
+                {
+                    cmd3.Parameters.AddWithValue("@Id", id);
+                    using (var r3 = cmd3.ExecuteReader())
+                    {
+                        if (r3.Read())
+                        {
+                            allModels.Importo = r3.GetDecimal(0);
+                        }
+                    }
+                }
+
+                return allModels;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Errore: {ex.Message}");
+                return null;
+            }
+        }
 
         public Prenotazione CreaPrenotazione(Prenotazione prenotazione)
         {
