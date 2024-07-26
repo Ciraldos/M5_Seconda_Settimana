@@ -16,19 +16,30 @@ function getPrenotazioniByCf() {
         url: `${basePath}/ByCf?cf=${cf}`,
         method: 'get',
         success: (data) => {
-            let ul = $("#prenotazioniContainer ul");
-            ul.empty();
+            let container = $("#prenotazioniContainer");
+            container.empty();
             $(data).each((_, prenotazione) => {
-                let textSpan = $('<span>').text(`Prenotazione ID: ${prenotazione.idPrenotazione}, NumProgressivo: ${prenotazione.numProgressivo}, Anno: ${prenotazione.anno}, SoggiornoDal: ${prenotazione.soggiornoDal}, SoggiornoAl: ${prenotazione.soggiornoAl}, Caparra: ${prenotazione.caparra}, Tariffa: ${prenotazione.tariffa}, PensioneCompleta: ${prenotazione.pensioneCompleta}, IdCliente: ${prenotazione.idCliente}, IdCamera: ${prenotazione.idCamera}`);
-                let li = $('<li>');
-                textSpan.appendTo(li);
-                li.appendTo(ul);
+                let card = $(`<div class="card mt-3">
+            <div class="card-body">
+            <h5 class="card-title">Prenotazione ID: ${prenotazione.idPrenotazione}</h5>
+            <p class="card-text">NumProgressivo: ${prenotazione.numProgressivo}</p>
+            <p class="card-text">Anno: ${prenotazione.anno}</p>
+            <p class="card-text">SoggiornoDal: ${prenotazione.soggiornoDal}</p>
+            <p class="card-text">SoggiornoAl: ${prenotazione.soggiornoAl}</p>
+            <p class="card-text">Caparra: ${prenotazione.caparra}</p>
+            <p class="card-text">Tariffa: ${prenotazione.tariffa}</p>
+            <p class="card-text">PensioneCompleta: ${prenotazione.pensioneCompleta}</p>
+            <p class="card-text">IdCliente: ${prenotazione.idCliente}</p>
+            <p class="card-text">IdCamera: ${prenotazione.idCamera}</p>
+            </div>
+            </div>`);
+                container.append(card);
             });
         },
         error: (xhr, status, error) => {
-            let ul = $("#prenotazioniContainer ul");
-            ul.empty();
-            ul.append('<li>Errore durante la ricerca delle prenotazioni: ' + error + '</li>');
+            let container = $("#prenotazioniContainer");
+            container.empty();
+            container.append('<li>Errore durante la ricerca delle prenotazioni: ' + error + '</li>');
         }
     });
 }
@@ -39,19 +50,30 @@ function getPrenotazioniByPensione() {
         url: `${basePath}/ByPensione?p=${pensione}`,
         method: 'get',
         success: (data) => {
-            let ul = $("#prenotazioniContainer ul");
-            ul.empty();
+            let container = $("#prenotazioniContainer");
+            container.empty();
             $(data).each((_, prenotazione) => {
-                let textSpan = $('<span>').text(`Prenotazione ID: ${prenotazione.idPrenotazione}, NumProgressivo: ${prenotazione.numProgressivo}, Anno: ${prenotazione.anno}, SoggiornoDal: ${prenotazione.soggiornoDal}, SoggiornoAl: ${prenotazione.soggiornoAl}, Caparra: ${prenotazione.caparra}, Tariffa: ${prenotazione.tariffa}, PensioneCompleta: ${prenotazione.pensioneCompleta}, IdCliente: ${prenotazione.idCliente}, IdCamera: ${prenotazione.idCamera}`);
-                let li = $('<li>');
-                textSpan.appendTo(li);
-                li.appendTo(ul);
+                let card = $(`<div class="card">
+            <div class="card-body">
+            <h5 class="card-title">Prenotazione ID: ${prenotazione.idPrenotazione}</h5>
+            <p class="card-text">NumProgressivo: ${prenotazione.numProgressivo}</p>
+            <p class="card-text">Anno: ${prenotazione.anno}</p>
+            <p class="card-text">SoggiornoDal: ${prenotazione.soggiornoDal}</p>
+            <p class="card-text">SoggiornoAl: ${prenotazione.soggiornoAl}</p>
+            <p class="card-text">Caparra: ${prenotazione.caparra}</p>
+            <p class="card-text">Tariffa: ${prenotazione.tariffa}</p>
+            <p class="card-text">PensioneCompleta: ${prenotazione.pensioneCompleta}</p>
+            <p class="card-text">IdCliente: ${prenotazione.idCliente}</p>
+            <p class="card-text">IdCamera: ${prenotazione.idCamera}</p>
+            </div>
+            </div>`);
+                container.append(card);
             });
         },
         error: (xhr, status, error) => {
-            let ul = $("#prenotazioniContainer ul");
-            ul.empty();
-            ul.append('<li>Errore durante la ricerca delle prenotazioni: ' + error + '</li>');
+            let ul = $("#prenotazioniContainer");
+            container.empty();
+            container.append('<li>Errore durante la ricerca delle prenotazioni: ' + error + '</li>');
         }
     });
 }

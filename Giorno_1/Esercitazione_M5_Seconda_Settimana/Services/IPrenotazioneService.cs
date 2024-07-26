@@ -11,6 +11,9 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
         public IEnumerable<Prenotazione> PrenotazioneByPensione(string p);
         public IEnumerable<Prenotazione> GetAll();
         public AllModels Checkout(int id);
+        public List<Servizio> GetServizi();
+
+
 
     }
 }

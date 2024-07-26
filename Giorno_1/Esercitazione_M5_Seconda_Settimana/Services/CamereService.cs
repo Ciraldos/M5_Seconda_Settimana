@@ -7,7 +7,6 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
     {
         private string connectionstring;
         private const string COMMAND_CREATE_CAMERE = "INSERT INTO Camere (NumCamera, Descrizione, Tipologia) OUTPUT INSERTED.IdCamera Values (@NumCamera, @Descrizione, @Tipologia)";
-
         public CamereService(IConfiguration configuration)
         {
             connectionstring = configuration.GetConnectionString("AuthDb")!;

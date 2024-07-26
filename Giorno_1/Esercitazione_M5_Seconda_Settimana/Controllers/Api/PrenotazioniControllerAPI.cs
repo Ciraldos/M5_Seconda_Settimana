@@ -1,11 +1,13 @@
 ﻿using Esercitazione_M5_Seconda_Settimana.Models;
 using Esercitazione_M5_Seconda_Settimana.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Esercitazione_M5_Seconda_Settimana.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PrenotazioniControllerAPI : ControllerBase
     {
         private IPrenotazioneService _prenotazioneService;

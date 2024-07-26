@@ -15,6 +15,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
         private const string GET_STANZA_PERIODO_TARIFFA = "SELECT C.NumCamera, P.SoggiornoDal, P.SoggiornoAl, P.Tariffa FROM Prenotazioni as P INNER JOIN Camere as C ON P.IdCamera = C.IdCamera WHERE P.IdPrenotazione = @Id";
         private const string GET_SERVIZI_BY_PRENOTAZIONE = "SELECT S.* FROM Servizi as S INNER JOIN PrenotazioniServizi as PS ON S.IdServizio = PS.IdServizio WHERE PS.IdPrenotazione = @Id";
         private const string GET_IMPORTO = "SELECT (p.Tariffa - p.Caparra + ISNULL(SUM(ps.Quantita * ps.Prezzo), 0)) AS ServizioPrezzo FROM Prenotazioni AS p LEFT JOIN PrenotazioniServizi AS ps ON p.IdPrenotazione = ps.IdPrenotazione WHERE p.IdPrenotazione = @Id GROUP BY p.Tariffa, p.Caparra";
+        private const string GET_SERVIZI = "SELECT * FROM Servizi";
         public PrenotazioneService(IConfiguration configuration)
         {
             connectionstring = configuration.GetConnectionString("AuthDb")!;
@@ -49,7 +50,29 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
             return prenotazioni;
 
         }
-
+        public List<Servizio> GetServizi()
+        {
+            List<Servizio> servizi = new List<Servizio>();
+            try
+            {
+                using var conn = new SqlConnection(connectionstring);
+                conn.Open();
+                using var cmd = new SqlCommand(GET_SERVIZI, conn);
+                using var r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    var s = new Servizio
+                    {
+                        IdServizio = r.GetInt32(0),
+                        Descrizione = r.GetString(1),
+                    };
+                    servizi.Add(s);
+                }
+                return servizi;
+            }
+            catch (Exception ex) { }
+            return null;
+        }
         public AllModels Checkout(int id)
         {
             AllModels allModels = new AllModels();

@@ -38,6 +38,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
 
         public IActionResult CreaPrenotazioneServizio()
         {
+            ViewBag.servizi = _prenotazioneService.GetServizi();
             return View();
         }
 
