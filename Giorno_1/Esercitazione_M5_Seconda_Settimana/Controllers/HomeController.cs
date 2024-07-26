@@ -17,12 +17,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return RedirectToAction("GetAllPrenotazioni", "Prenotazioni");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

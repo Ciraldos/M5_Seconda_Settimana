@@ -29,7 +29,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
                 var user = _authService.Login(u.Username, u.Password);
                 if (user == null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Register");
                 }
                 var claims = new List<Claim>
                 {
@@ -41,7 +41,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
             }
             catch (Exception ex) { }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetAllPrenotazioni", "Prenotazioni");
         }
 
         public IActionResult Register()
