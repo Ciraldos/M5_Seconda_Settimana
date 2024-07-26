@@ -57,6 +57,9 @@ function getPrenotazioniByPensione() {
         success: (data) => {
             let container = $("#prenotazioniContainer");
             container.empty();
+            let x = data.length
+            let num = $(`<h1 class="fs-2 text-center myPurple mt-3 fw-bold">Numero prenotazioni trovate: ${x}</h1>`);
+            container.append(num);
             $(data).each((_, prenotazione) => {
                 let card = $(`<div class="col-md-4 mt-3">
                 <div class="card card-custom">
