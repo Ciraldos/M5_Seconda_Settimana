@@ -5,95 +5,74 @@
     var id = ViewBag.Id;
 }
 
-<h1>Checkout</h1>
+<h1 class="ps-2 mb-2">Checkout</h1>
 
-<div>
-    <h4>Dettagli della Prenotazione ID: @id</h4>
-    <hr class="myBgPurple"/>
-    <dl class="row">
-        <dt class="col-sm-2">
-            Numero Camera:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Prenotazione.NumCamera)
-        </dd>
+        <div class="card card-custom">
+            <div class="card-header-custom">
+                Dettagli della Prenotazione ID: @id
+            </div>
+            <div class="card-body card-body-custom">
+                <dl class="row dl-horizontal">
+                    <dt class="col-sm-3">Numero Camera:</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Prenotazione.NumCamera)</dd>
 
-        <dt class="col-sm-2">
-            Data Inizio Soggiorno:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Prenotazione.SoggiornoDal)
-        </dd>
+                    <dt class="col-sm-3">Data Inizio Soggiorno:</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Prenotazione.SoggiornoDal)</dd>
 
-        <dt class="col-sm-2">
-            Data Fine Soggiorno:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Prenotazione.SoggiornoAl)
-        </dd>
+                    <dt class="col-sm-3">Data Fine Soggiorno:</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Prenotazione.SoggiornoAl)</dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Prenotazione.Tariffa)
-        </dt>
-        <dd class="col-sm-10">
-            €@Html.DisplayFor(model => model.Prenotazione.Tariffa)
-        </dd>
-    </dl>
-</div>
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Prenotazione.Tariffa)</dt>
+                    <dd class="col-sm-9">€@Html.DisplayFor(model => model.Prenotazione.Tariffa)</dd>
+                </dl>
+            </div>
+        </div>
 
-<div>
-    <h4>Servizi Aggiuntivi</h4>
-    <hr class="myBgPurple"/>
-    @if (Model.Servizio != null && Model.Servizio.Any())
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Quantità
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Servizio.First().Descrizione)
-                    </th>
-                    <th>Prezzo Singolo Servizio</th>
-                    <th>Prezzo Totale</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var servizio in Model.Servizio)
+        <div class="card card-custom mt-3">
+            <div class="card-header-custom">
+                Servizi Aggiuntivi
+            </div>
+            <div class="card-body card-body-custom">
+                @if (Model.Servizio != null && Model.Servizio.Any())
                 {
-                    <tr>
-                       
-                        <td>
-                            @Html.DisplayFor(modelItem => servizio.Quantita)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => servizio.Descrizione)
-                        </td>
-                        <td>€@Html.DisplayFor(modelItem => servizio.Prezzo)</td>
-                        <td>€@Html.DisplayFor(modelItem => servizio.PrezzoTot)</td>
-
-                    </tr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Quantità</th>
+                                <th>@Html.DisplayNameFor(model => model.Servizio.First().Descrizione)</th>
+                                <th>Prezzo Singolo Servizio</th>
+                                <th>Prezzo Totale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var servizio in Model.Servizio)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => servizio.Quantita)</td>
+                                    <td>@Html.DisplayFor(modelItem => servizio.Descrizione)</td>
+                                    <td>€@Html.DisplayFor(modelItem => servizio.Prezzo)</td>
+                                    <td>€@Html.DisplayFor(modelItem => servizio.PrezzoTot)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p>Nessun servizio aggiunto.</p>
-    }
-</div>
+                else
+                {
+                    <p>Nessun servizio aggiunto.</p>
+                }
+            </div>
+        </div>
 
-<div>
-    <h4>Importo</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Importo Totale:
-        </dt>
-        <dd class="col-sm-10">
-            €@Html.DisplayFor(model => model.Importo)
-        </dd>
-    </dl>
-</div>
+        <div class="card card-custom mt-3">
+            <div class="card-header-custom">
+                Importo
+            </div>
+            <div class="card-body card-body-custom">
+                <dl class="row dl-horizontal">
+                    <dt class="col-sm-3">Importo Totale:</dt>
+                    <dd class="col-sm-9">€@Html.DisplayFor(model => model.Importo)</dd>
+                </dl>
+            </div>
+        </div>
 
