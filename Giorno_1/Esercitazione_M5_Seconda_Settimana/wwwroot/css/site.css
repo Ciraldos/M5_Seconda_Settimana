@@ -44,6 +44,22 @@ body {
     transition: 350ms;
 }
 
+.myBtnTwo {
+    background-color: #7fc7d0;
+    border-radius: 2em;
+    border: none;
+    padding: 0.5em 1.4em;
+    color: white;
+    transition: 350ms;
+    text-decoration: none;
+}
+
+    .myBtnTwo:hover {
+        background-color: #65a0a7;
+        color: white;
+        transition: 350ms;
+    }
+
 .qnt {
     border-radius: 2em;
     padding-left: 1em;

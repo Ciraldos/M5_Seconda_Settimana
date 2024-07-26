@@ -53,7 +53,7 @@ function getPrenotazioniByPensione() {
             let container = $("#prenotazioniContainer");
             container.empty();
             $(data).each((_, prenotazione) => {
-                let card = $(`<div class="card">
+                let card = $(`<div class="card mt-3">
             <div class="card-body">
             <h5 class="card-title">Prenotazione ID: ${prenotazione.idPrenotazione}</h5>
             <p class="card-text">NumProgressivo: ${prenotazione.numProgressivo}</p>

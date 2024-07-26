@@ -1,98 +1,57 @@
 ﻿@model IEnumerable<Esercitazione_M5_Seconda_Settimana.Models.Prenotazione>
 
 @{
-    ViewData["Title"] = "GetAllPrenotazioni";
+    ViewData["Title"] = "Lista Prenotazioni";
 }
 
-<h1>GetAllPrenotazioni</h1>
+<div class="container">
+    <h1 class="myOlive text-center">Lista Prenotazioni</h1>
+    <div class="row justify-content-center">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdPrenotazione)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataPrenotazione)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumProgressivo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Anno)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoggiornoDal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoggiornoAl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Caparra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tariffa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PensioneCompleta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCamera)
-            </th>
-            <th>
-                Checkout
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPrenotazione)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataPrenotazione)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumProgressivo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Anno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoggiornoDal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoggiornoAl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Caparra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tariffa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PensioneCompleta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCamera)
-            </td>
-            <td>
-                <a asp-controller="Prenotazioni" asp-action="Checkout" asp-route-id="@item.IdPrenotazione">Checkout</a>
-            </td>
-            <td>
-                <a asp-controller="Prenotazioni" asp-action="CreaPrenotazioneServizio" asp-route-id="@item.IdPrenotazione">Aggiungi Servizi</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <table class="table mt-4 text-center">
+            <thead>
+                <tr class="myBgGray text-nowrap">
+                    <th class="myOlive">Id. Prenotazione</th>
+                    <th class="myOlive">Data Prenotazione</th>
+                    <th class="myOlive">Num. Progressivo</th>
+                    <th class="myOlive">@Html.DisplayNameFor(model => model.Anno)</th>
+                    <th class="myOlive">Data Inizio Soggiorno</th>
+                    <th class="myOlive">Data Fine Soggiorno</th>
+                    <th class="myOlive">@Html.DisplayNameFor(model => model.Caparra)</th>
+                    <th class="myOlive">@Html.DisplayNameFor(model => model.Tariffa)</th>
+                    <th class="myOlive">Tipo Pensione</th>
+                    <th class="myOlive">Id. Cliente</th>
+                    <th class="myOlive">Id. Camera</th>
+                    <th class="myOlive"></th>
+                    <th class="myOlive"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-nowrap">
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.IdPrenotazione)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.DataPrenotazione)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.NumProgressivo)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.Anno)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.SoggiornoDal)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.SoggiornoAl)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.Caparra)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.Tariffa)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.PensioneCompleta)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.IdCliente)</td>
+                        <td class="py-3">@Html.DisplayFor(modelItem => item.IdCamera)</td>
+                        <td class="py-3">
+                            <a class="myBtn" asp-controller="Prenotazioni" asp-action="Checkout" asp-route-id="@item.IdPrenotazione">Checkout</a>
+                        </td>
+                        <td class="py-3">
+                            <a class="myBtnTwo" asp-controller="Prenotazioni" asp-action="CreaPrenotazioneServizio" asp-route-id="@item.IdPrenotazione">Aggiungi Servizi</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
