@@ -9,7 +9,7 @@
 
 <div>
     <h4>Dettagli della Prenotazione ID: @id</h4>
-    <hr />
+    <hr class="myBgPurple"/>
     <dl class="row">
         <dt class="col-sm-2">
             Numero Camera:
@@ -43,13 +43,12 @@
 
 <div>
     <h4>Servizi Aggiuntivi</h4>
-    <hr />
+    <hr class="myBgPurple"/>
     @if (Model.Servizio != null && Model.Servizio.Any())
     {
         <table class="table">
             <thead>
                 <tr>
-                    
                     <th>
                         Quantità
                     </th>

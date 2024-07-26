@@ -73,3 +73,48 @@ body {
     outline: none;
     transition: 350ms;
 }
+
+.myBorder {
+    border: 1px solid #cbcdcd;
+    border-radius: 5px;
+}
+
+.myBg {
+    background-color: #5c5f60;
+}
+
+.card-custom {
+    margin: 10px 10px 10px 10px;
+    padding: 0; 
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-header-custom {
+    background-color: #8452FF;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-body-custom {
+    padding: 20px;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+    .card-text span {
+        font-weight: bold;
+    }
+
+.icon {
+    margin-right: 10px;
+    color: #007bff;
+}
