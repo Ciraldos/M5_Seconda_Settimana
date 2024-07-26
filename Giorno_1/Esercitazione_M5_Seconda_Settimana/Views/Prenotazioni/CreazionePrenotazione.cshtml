@@ -1,54 +1,54 @@
 ﻿@model Esercitazione_M5_Seconda_Settimana.Models.Prenotazione
 
 @{
-    ViewData["Title"] = "CreazionePrenotazione";
+    ViewData["Title"] = "Aggiunta Prenotazione";
 }
 
-<h1>CreazionePrenotazione</h1>
 
-<h4>Prenotazione</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1 class="text-center">Aggiungi Prenotazione</h1>
+
+        <hr />
         <form asp-action="CreazionePrenotazione">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="DataPrenotazione" class="control-label"></label>
+                <label asp-for="DataPrenotazione" class="control-label mb-1">Inserisci data prenotazione:</label>
                 <input asp-for="DataPrenotazione" class="form-control" />
                 <span asp-validation-for="DataPrenotazione" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NumProgressivo" class="control-label"></label>
+            <div class="form-group mt-3">
+                <label asp-for="NumProgressivo" class="control-label mb-1">Inserisci num. progressivo:</label>
                 <input asp-for="NumProgressivo" class="form-control" />
                 <span asp-validation-for="NumProgressivo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Anno" class="control-label"></label>
+            <div class="form-group mt-3">
+                <label asp-for="Anno" class="control-label mb-1">Inserisci anno:</label>
                 <input asp-for="Anno" class="form-control" />
                 <span asp-validation-for="Anno" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="SoggiornoDal" class="control-label"></label>
+            <div class="form-group mt-3">
+                <label asp-for="SoggiornoDal" class="control-label mb-1">Inserisci data inizio soggiorno:</label>
                 <input asp-for="SoggiornoDal" class="form-control" />
                 <span asp-validation-for="SoggiornoDal" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="SoggiornoAl" class="control-label"></label>
+            <div class="form-group mt-3">
+                <label asp-for="SoggiornoAl" class="control-label mb-1">Inserisci data fine soggiorno:</label>
                 <input asp-for="SoggiornoAl" class="form-control" />
                 <span asp-validation-for="SoggiornoAl" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Caparra" class="control-label"></label>
+            <div class="form-group mt-3">
+                <label asp-for="Caparra" class="control-label mb-1">Inserisci caparra (€):</label>
                 <input asp-for="Caparra" class="form-control" />
                 <span asp-validation-for="Caparra" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Tariffa" class="control-label"></label>
+            <div class="form-group mt-3">
+                <label asp-for="Tariffa" class="control-label mb-1">Inserisci tariffa (€):</label>
                 <input asp-for="Tariffa" class="form-control" />
                 <span asp-validation-for="Tariffa" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PensioneCompleta" class="control-label"></label>
+            <div class="form-group mt-3">
+                <label asp-for="PensioneCompleta" class="control-label mb-1">Inserisci tipo pensione:</label>
                 <select asp-for="PensioneCompleta" class="form-control">
                     <option value="">Seleziona una opzione</option>
                     <option value="Prima Colazione">Prima Colazione</option>
@@ -57,25 +57,21 @@
                 </select>
                 <span asp-validation-for="PensioneCompleta" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdCliente" class="control-label"></label>
+            <div class="form-group mt-3">
+                <label asp-for="IdCliente" class="control-label mb-1">Inserisci identificativo cliente:</label>
                 <input asp-for="IdCliente" class="form-control" />
                 <span asp-validation-for="IdCliente" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdCamera" class="control-label"></label>
+            <div class="form-group mt-3">
+                <label asp-for="IdCamera" class="control-label mb-1">Inserisci identificativo camera:</label>
                 <input asp-for="IdCamera" class="form-control" />
                 <span asp-validation-for="IdCamera" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mt-3">
+                <input type="submit" value="Crea" class="btn myBtn" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

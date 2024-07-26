@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Work+Sans&display=swap');
+
 html {
   font-size: 14px;
 }
@@ -18,5 +20,40 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: "Barlow", sans-serif;
+}
+
+.myBgPurple {
+    background-color: #8452FF;
+}
+
+.myBtn {
+    background-color: #8452FF;
+    border-radius: 2em;
+    border: none;
+    padding: 0.5em 1.4em;
+    color: white;
+    transition: 350ms;
+    text-decoration: none;
+}
+
+.myBtn:hover {
+    background-color: #6841bd;
+    color: white;
+    transition: 350ms;
+}
+
+.qnt {
+    border-radius: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border: 1px solid #8452FF;
+    transition: 350ms;
+}
+
+.qnt:focus {
+    border: 1px solid #8EDCE6;
+    outline: none;
+    transition: 350ms;
 }

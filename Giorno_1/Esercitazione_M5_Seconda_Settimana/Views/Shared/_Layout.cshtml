@@ -10,19 +10,19 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid d-flex justify-content-between">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light myBgPurple border-bottom box-shadow mb-3">
+            <div class="container-fluid d-flex justify-content-between align-items-center px-4">
+                <a class="navbar-brand text-white fs-3 fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 d-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between align-items-center">
+                    <ul class="navbar-nav flex-grow-1 d-flex justify-content-between align-items-center">
                         @if (User.Identity.IsAuthenticated)
                         {   <div class="d-flex">
                                 <div class="dropdown">
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Azioni Creazione
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -40,7 +40,7 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown">
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Azioni Cerca
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -53,20 +53,19 @@
                                     </ul>
                                 </div>    
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prenotazioni" asp-action="GetAllPrenotazioni">Lista Prenotazioni</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Prenotazioni" asp-action="GetAllPrenotazioni">Lista Prenotazioni</a>
                                 </li>
                                 
                             </div>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Esci</a>
-                            </li>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Auth" asp-action="Logout">Esci</a>
+                            
                         }
                       
                     </ul>
                 </div>
                 @if(!User.Identity.IsAuthenticated)
                 {
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Accedi</a>
+                <a class="nav-link text-white" asp-area="" asp-controller="Auth" asp-action="Login">Accedi</a>
                 }
             </div>
         </nav>
@@ -76,12 +75,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Esercitazione_M5_Seconda_Settimana - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

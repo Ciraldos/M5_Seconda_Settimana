@@ -1,68 +1,73 @@
 ﻿@model Esercitazione_M5_Seconda_Settimana.Models.Cliente
 
 @{
-    ViewData["Title"] = "CreaCliente";
+    ViewData["Title"] = "Crea Cliente";
 }
 
-<h1>CreaCliente</h1>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1 class="text-center">Crea Cliente</h1>
 
-<h4>Cliente</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+        <hr />
         <form asp-action="CreaCliente">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CF" class="control-label"></label>
-                <input asp-for="CF" class="form-control" />
-                <span asp-validation-for="CF" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cognome" class="control-label"></label>
-                <input asp-for="Cognome" class="form-control" />
-                <span asp-validation-for="Cognome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+
+
+            <div class="form-group mt-3">
+                <label asp-for="Nome" class="control-label mb-1 ps-2">Inserisci nome:</label>
+                <input asp-for="Nome" class="form-control qnt" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Citta" class="control-label"></label>
-                <input asp-for="Citta" class="form-control" />
+            <div class="form-group mt-3">
+                <label asp-for="Cognome" class="control-label mb-1 ps-2">Inserisci cognome:</label>
+                <input asp-for="Cognome" class="form-control qnt" />
+                <span asp-validation-for="Cognome" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group mt-3">
+                <label asp-for="Citta" class="control-label mb-1 ps-2">Inserisci città:</label>
+                <input asp-for="Citta" class="form-control qnt" />
                 <span asp-validation-for="Citta" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Provincia" class="control-label"></label>
-                <input asp-for="Provincia" class="form-control" />
+
+            <div class="form-group mt-3">
+                <label asp-for="Provincia" class="control-label mb-1 ps-2">Inserisci provincia<span class="ms-2 fw-bolder">(2 caratteri):</span></label>
+                <input asp-for="Provincia" class="form-control qnt" />
                 <span asp-validation-for="Provincia" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+            <div class="form-group mt-3">
+                <label asp-for="CF" class="control-label mb-1 ps-2">Inserisci codice fiscale:</label>
+                <input asp-for="CF" class="form-control qnt" />
+                <span asp-validation-for="CF" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <label asp-for="Email" class="control-label mb-1 ps-2">Inserisci email:</label>
+                <input asp-for="Email" class="form-control qnt" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
+
+            <div class="form-group mt-3">
+                <label asp-for="Telefono" class="control-label mb-1 ps-2">Inserisci num. telefono fisso:</label>
+                <input asp-for="Telefono" class="form-control qnt" />
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Cellulare" class="control-label"></label>
-                <input asp-for="Cellulare" class="form-control" />
+
+            <div class="form-group mt-3">
+                <label asp-for="Cellulare" class="control-label mb-1 ps-2">Inserisci num. telefono cellulare:</label>
+                <input asp-for="Cellulare" class="form-control qnt" />
                 <span asp-validation-for="Cellulare" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Crea" class="btn myBtn" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
