@@ -25,6 +25,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Controllers
 
         public IActionResult Checkout(int id)
         {
+            ViewBag.Id = id;
             var p = _prenotazioneService.Checkout(id);
             return View(p);
         }

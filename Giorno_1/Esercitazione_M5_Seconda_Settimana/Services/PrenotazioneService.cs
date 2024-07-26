@@ -13,7 +13,7 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
         private const string PRENOTAZIONE_BY_PENSIONE = "SELECT IdPrenotazione,DataPrenotazione,NumProgressivo, Anno, SoggiornoDal,SoggiornoAl, Caparra, Tariffa, PensioneCompleta, IdCliente, IdCamera FROM Prenotazioni WHERE PensioneCompleta = @Pensione";
         private const string GET_PRENOTAZIONI = "SELECT * FROM Prenotazioni";
         private const string GET_STANZA_PERIODO_TARIFFA = "SELECT C.NumCamera, P.SoggiornoDal, P.SoggiornoAl, P.Tariffa FROM Prenotazioni as P INNER JOIN Camere as C ON P.IdCamera = C.IdCamera WHERE P.IdPrenotazione = @Id";
-        private const string GET_SERVIZI_BY_PRENOTAZIONE = "SELECT S.* FROM Servizi as S INNER JOIN PrenotazioniServizi as PS ON S.IdServizio = PS.IdServizio WHERE PS.IdPrenotazione = @Id";
+        private const string GET_SERVIZI_BY_PRENOTAZIONE = "SELECT S.*, PS.Quantita, PS.Prezzo, (PS.Quantita * PS.Prezzo) as PrezzoTot FROM Servizi as S INNER JOIN PrenotazioniServizi as PS ON S.IdServizio = PS.IdServizio WHERE PS.IdPrenotazione = @Id";
         private const string GET_IMPORTO = "SELECT (p.Tariffa - p.Caparra + ISNULL(SUM(ps.Quantita * ps.Prezzo), 0)) AS ServizioPrezzo FROM Prenotazioni AS p LEFT JOIN PrenotazioniServizi AS ps ON p.IdPrenotazione = ps.IdPrenotazione WHERE p.IdPrenotazione = @Id GROUP BY p.Tariffa, p.Caparra";
         private const string GET_SERVIZI = "SELECT * FROM Servizi";
         public PrenotazioneService(IConfiguration configuration)
@@ -104,10 +104,13 @@ namespace Esercitazione_M5_Seconda_Settimana.Services
                     {
                         while (r2.Read())
                         {
-                            var s = new Servizio
+                            var s = new ServizioWithQuantity
                             {
                                 IdServizio = r2.GetInt32(0),
                                 Descrizione = r2.GetString(1),
+                                Quantita = r2.GetInt32(2),
+                                Prezzo = r2.GetDecimal(3),
+                                PrezzoTot = r2.GetDecimal(4),
                             };
                             allModels.Servizio.Add(s);
                         }

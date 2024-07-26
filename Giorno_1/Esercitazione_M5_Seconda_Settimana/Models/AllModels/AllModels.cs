@@ -3,7 +3,7 @@
     public class AllModels
     {
         public PrenotazioniCamerePeriodoTariffa Prenotazione { get; set; }
-        public List<Servizio> Servizio { get; set; } = new List<Servizio>();
+        public List<ServizioWithQuantity> Servizio { get; set; } = new List<ServizioWithQuantity>();
         public decimal Importo { get; set; }
     }
 }
